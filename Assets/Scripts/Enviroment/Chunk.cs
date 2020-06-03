@@ -2,13 +2,14 @@ using UnityEngine;
 using VoxelValley;
 using VoxelValley.Enviroment;
 using VoxelValley.Engine.Threading;
+using VoxelValley.Enviroment.RegionManagement;
 
 public class Chunk : MonoBehaviour
 {
     public bool HasGenerated = false;
     public bool IsFinished = false;
 
-    public ushort[,,] voxels = new ushort[CommonConstants.World.ChunkSizeXZ, CommonConstants.World.ChunkSizeY, CommonConstants.World.ChunkSizeXZ];
+    public ushort[,,] voxels;
 
     Vector2Int positionInWorldSpace;
     Vector2Int positionInChunkSpace;
@@ -33,12 +34,7 @@ public class Chunk : MonoBehaviour
 
     void Generate()
     {
-        // voxels = RegionManager.GetChunk(positionInWorldSpace.X, positionInWorldSpace.Z);
-
-        for (int x = 0; x < voxels.GetLength(0); x++)
-            for (int y = 0; y < voxels.GetLength(1); y++)
-                for (int z = 0; z < voxels.GetLength(2); z++)
-                    voxels[x, y, z] = 2;
+        voxels = RegionManager.GetChunk(positionInWorldSpace.x, positionInWorldSpace.y);
     }
 
     void PrepareMesh()
@@ -64,5 +60,13 @@ public class Chunk : MonoBehaviour
         gameObject.AddComponent<MeshRenderer>();
 
         IsFinished = true;
+    }
+
+    public static bool InChunk(int x, int y, int z)
+    {
+        return (x > 0 && y > 0 && z > 0 &&
+            x < CommonConstants.World.ChunkSizeXZ &&
+            y < CommonConstants.World.ChunkSizeY &&
+            z < CommonConstants.World.ChunkSizeXZ);
     }
 }

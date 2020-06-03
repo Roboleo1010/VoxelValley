@@ -22,8 +22,8 @@ namespace VoxelValley.Enviroment
             for (int x = 0; x < voxels.GetLength(0); x++)
                 for (int y = 0; y < voxels.GetLength(1); y++)
                     for (int z = 0; z < voxels.GetLength(2); z++)
-                        // if (voxels[x, y, z] != VoxelManager.AirVoxel)
-                        GetMeshData(x, y, z);
+                        if (voxels[x, y, z] != VoxelManager.AirVoxel)
+                            GetMeshData(x, y, z);
         }
 
         void GetMeshData(int x, int y, int z)
@@ -118,12 +118,12 @@ namespace VoxelValley.Enviroment
 
             if (addedVertices > 0)
             {
-                // Color32 voxelColor = VoxelManager.GetVoxel(voxels[x, y, z]).Color;
-                Color32 voxelColor = new Color32(255, 0, 0, 0);
+                Color32 voxelColor = VoxelManager.GetVoxel(voxels[x, y, z]).Color;
                 for (int i = 0; i < addedVertices; i++)
                     Colors.Add(voxelColor);
             }
         }
+
         bool IsSolid(int x, int y, int z)
         {
             if (x < 0 || x >= voxels.GetLength(0) ||
@@ -131,8 +131,7 @@ namespace VoxelValley.Enviroment
                 z < 0 || z >= voxels.GetLength(2))
                 return true;
 
-            // return voxels[x, y, z] == VoxelManager.AirVoxel;
-            return false;
+            return voxels[x, y, z] == VoxelManager.AirVoxel;
         }
     }
 }

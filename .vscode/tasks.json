@@ -26,7 +26,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/VoxelValley.Common/VoxelValley.Common.csproj",
+                "${workspaceFolder}/VoxelValley.Common/VoxelValley.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
