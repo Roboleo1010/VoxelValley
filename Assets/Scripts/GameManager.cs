@@ -9,21 +9,9 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-
+        log.Info("Starting Voxel Valley!");
 
         VoxelManager.LoadVoxels();
         StructureManager.LoadStructures();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        log.Info("Starting Voxel Valley!");
     }
 }

@@ -56,8 +56,11 @@ public class Chunk : MonoBehaviour
 
         voxelMesh = null;
 
-        gameObject.AddComponent<MeshFilter>().mesh = mesh;
-        gameObject.AddComponent<MeshRenderer>();
+        MeshFilter meshFilter = gameObject.AddComponent<MeshFilter>();
+        meshFilter.mesh = mesh;
+
+        MeshRenderer mr = gameObject.AddComponent<MeshRenderer>();
+        mr.material = World.Instance.voxelMaterial;
 
         IsFinished = true;
     }

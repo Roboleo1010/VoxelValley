@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
+using log4net;
 using UnityEngine;
 using ThreadPriority = System.Threading.ThreadPriority;
 
@@ -9,6 +10,8 @@ namespace VoxelValley.Engine.Threading
 {
     public class ThreadManager : MonoBehaviour
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof(ThreadManager));
+
         //Singleton
         private static ThreadManager _instance;
         public static ThreadManager Instance { get { return _instance; } }
@@ -51,7 +54,7 @@ namespace VoxelValley.Engine.Threading
             }
 
             if (currentRunningThreads == ClientConstants.Threading.MaxThreads)
-                UnityEngine.Debug.Log("Reached maximum concurrent Threads. Delaying until threads are finished.");
+                log.Info("Reached maximum concurrent Threads. Delaying until threads are finished.");
         }
 
         void StartThread(Guid id, ThreadPriority priority)

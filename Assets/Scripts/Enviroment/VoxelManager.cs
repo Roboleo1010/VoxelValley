@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using log4net;
 using Newtonsoft.Json;
 using UnityEngine;
 using VoxelValley.Helper;
@@ -10,9 +11,10 @@ namespace VoxelValley.Enviroment
 {
     public static class VoxelManager
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof(VoxelManager));
+
         static Type type = typeof(VoxelManager);
         static Dictionary<ushort, Voxel> voxels = new Dictionary<ushort, Voxel>();
-
         static Dictionary<string, Voxel> voxelLookUp = new Dictionary<string, Voxel>();
 
         static ushort voxelIndex;
@@ -32,7 +34,7 @@ namespace VoxelValley.Enviroment
             foreach (string path in paths)
                 LoadVoxelJson(path);
 
-            Debug.Log($"Loaded {voxels.Count} voxels");
+            log.Info($"Loaded {voxels.Count} voxels");
         }
 
         static void LoadVoxelJson(string path)

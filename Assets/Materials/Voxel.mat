@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Voxel
-  m_Shader: {fileID: 4800000, guid: 5316f41b435dce44f88332a4d75f7205, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: e6d46e2556a8bc54e9e4f691dcf48721, type: 3}
+  m_ShaderKeywords: _VERTEXCOLOR
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -67,6 +67,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _IntensityVC: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1

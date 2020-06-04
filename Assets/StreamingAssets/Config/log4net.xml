@@ -1,7 +1,7 @@
 <log4net>
 	<root>
 		<level value="ALL" />
-		<appender-ref ref="FileAppender" />
+		<!-- <appender-ref ref="FileAppender" /> -->
 		<appender-ref ref="UnityAppender" />
 	</root>
 	<!-- Unity Log Appender -->

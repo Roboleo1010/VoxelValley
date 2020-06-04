@@ -1,5 +1,13 @@
 [
     {
+        "name": "missing_voxel",
+        "color": [
+            255,
+            0,
+            220
+        ]
+    },
+    {
         "name": "grass",
         "color": [
             19,

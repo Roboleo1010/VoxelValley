@@ -2,7 +2,7 @@ using System.IO;
 using log4net.Config;
 using UnityEngine;
 
-namespace VoxelValley.Assets.Scripts.Engine
+namespace VoxelValley.Engine
 {
     public class LoggingConfigurator
     {
