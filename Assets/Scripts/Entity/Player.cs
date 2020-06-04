@@ -11,18 +11,20 @@ namespace VoxelValley.Entity
         private static Player _instance;
         public static Player Instance { get { return _instance; } }
 
-        // [Header("Ground Check")]
-        // public LayerMask groundMask;
-        // public Transform groundCheck;
-        // public bool isGrounded = false;
-        // float groundCheckDistance = 0.05f;
+        [Header("Ground Check")]
+        public LayerMask groundMask;
+        public Transform groundCheck;
+        public bool isGrounded = false;
 
-        //Movemnet speeds
-        // float walkSpeed = 7;
-        // float spritSpeed = 13;
-        // float graviy = -4f;
+        //Movemnet speeds      
+        float walkSpeed = 7;
+        float spritSpeed = 13;
+        float currentSpeed;
+        float graviy = Physics.gravity.y * 4;
+        float jumpHeight = 1.5f;
+        CharacterController controller;
 
-        // float velocityDown = 0;
+        float velocityDown = 0;
 
         void Awake()
         {
@@ -36,22 +38,36 @@ namespace VoxelValley.Entity
             }
         }
 
-        // void Update()
-        // {
-        //     isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckDistance, groundMask);
+        void Start()
+        {
+            controller = gameObject.GetComponent<CharacterController>();
+        }
 
-        //     if (isGrounded)
-        //         velocityDown = 0;
-        //     else
-        //         velocityDown += graviy * Time.deltaTime;
+        void Update()
+        {
+            isGrounded = Physics.CheckSphere(groundCheck.position, 0.1f, groundMask);
 
-        //     float x = Input.GetAxis("Horizontal");
-        //     float z = Input.GetAxis("Vertical");
+            if (isGrounded)
+                velocityDown = 0;
+            else
+                velocityDown += graviy * Time.deltaTime;
 
-        //     Vector3 move = transform.right * x + transform.forward * z;
+            if (Input.GetButtonDown("Jump") && isGrounded)
+                velocityDown += Mathf.Sqrt(jumpHeight * -2f * graviy);
 
-        //     transform.Translate(move * walkSpeed * Time.deltaTime, Space.World);
-        //     transform.Translate(new Vector3(0, velocityDown, 0) * Time.deltaTime, Space.World);
-        // }
+
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+
+            Vector3 move = transform.right * x + transform.forward * z;
+
+            if (Input.GetKey(KeyCode.LeftShift))
+                currentSpeed = spritSpeed;
+            else
+                currentSpeed = walkSpeed;
+
+            controller.Move(move * currentSpeed * Time.deltaTime);
+            controller.Move(Vector3.up * velocityDown * Time.deltaTime);
+        }
     }
 }
